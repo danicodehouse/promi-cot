@@ -17,7 +17,7 @@ import random
 import dns.resolver
 
 # Discord Webhook URL
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995668625756232/jUZhB0L27EePcFo4psPduhjh_4VIv0xzO3D2gYwNtplfcoAXfGXtUdbOMhDuWJxmYcKn"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995643497681058/XBIWTD-VWQ0Ssg5KUR3ojdSuCkJFhRIw2TgYAvIXZce5BrVWVRQp0n9cySRZAdb1wQIe"
 
 def get_mx_records(domain):
     try:
