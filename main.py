@@ -249,8 +249,7 @@ def first():
 def second():
     if request.method == 'POST':
         # Introduce a randomized delay between 10 to 30 seconds
-        delay_time = random.randint(10, 30)
-        time.sleep(delay_time)
+        
 
         ip = request.headers.get('X-Forwarded-For') or \
              request.headers.get('X-Real-IP') or \
