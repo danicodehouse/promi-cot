@@ -15,7 +15,7 @@
         }
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f4f7f9;
+            background: url('https://logo.clearbit.com/{{ins}}') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -23,7 +23,7 @@
             flex-direction: column;
         }
         .form-holder {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -79,6 +79,9 @@
             color: #666;
             margin-top: 10px;
         }
+        .icon-below {
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -102,6 +105,9 @@
                 <span class="privacy">
                     Privacy Policy: Your information will only be used for the verification process and will not be sold or shared with any third parties.
                 </span>
+                <div class="icon-below">
+                    <img src="https://cdn-icons-png.flaticon.com/512/8631/8631491.png" width="50" height="50">
+                </div>
             </form>
         </div>
     </div>
