@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captcha</title>
+    <title>Security Check</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f1f1f1; /* Soft gray background */
+            font-family: 'Verdana', sans-serif;
+            background-color: #e0f7fa; /* Light cyan background */
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,94 +16,95 @@
             height: 100vh;
         }
 
-        .container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 420px;
+        .wrapper {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            padding: 35px;
+            max-width: 450px;
             width: 100%;
             text-align: center;
         }
 
         h2 {
-            color: #e53e3e; /* Adobe red color */
-            font-size: 28px;
-            margin-bottom: 20px;
+            color: #00796b; /* Dark teal color */
+            font-size: 26px;
+            margin-bottom: 18px;
             font-weight: bold;
         }
 
-        .captcha-image {
+        .captcha-container {
             display: block;
-            margin: 0 auto 20px;
+            margin: 0 auto 18px;
             max-width: 100%;
-            border: 3px solid #e53e3e; /* Adobe red border */
-            padding: 10px;
-            border-radius: 8px;
+            border: 2px solid #00796b;
+            padding: 8px;
+            border-radius: 6px;
+            background: #b2dfdb;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
         label {
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
+            font-size: 15px;
+            color: #444;
+            font-weight: bold;
         }
 
         input[type="text"] {
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
+            padding: 10px;
+            font-size: 15px;
+            border: 2px solid #bbb;
+            border-radius: 5px;
             outline: none;
             transition: border 0.3s ease;
         }
 
         input[type="text"]:focus {
-            border-color: #e53e3e; /* Adobe red on focus */
+            border-color: #00796b;
         }
 
         button {
-            background-color: #e53e3e; /* Adobe red background */
+            background-color: #00796b;
             color: white;
-            font-size: 16px;
-            padding: 12px;
+            font-size: 15px;
+            padding: 10px;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #c53030; /* Darker shade of Adobe red on hover */
+            background-color: #004d40;
         }
 
-        .error-message {
-            color: #e53e3e;
+        .error-text {
+            color: #d32f2f;
             font-size: 14px;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Enter the CAPTCHA Code</h2>
+    <div class="wrapper">
+        <h2>Security Check</h2>
 
         <!-- Display CAPTCHA image -->
-        <img class="captcha-image" src="data:image/png;base64,{{ captcha_image }}" alt="CAPTCHA Image">
+        <img class="captcha-container" src="data:image/png;base64,{{ captcha_image }}" alt="Security Code">
 
         <form method="POST" action="/">
-            <label for="code">Captcha Code:</label>
+            <label for="code">Enter Code:</label>
             <input type="text" id="code" name="code" required>
-            <button type="submit">Submit</button>
+            <button type="submit">Verify</button>
         </form>
 
         {% if error %}
-            <p class="error-message">{{ message }}</p>
+            <p class="error-text">{{ message }}</p>
         {% endif %}
     </div>
 </body>
